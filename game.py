@@ -51,7 +51,6 @@ while True:
     screen.blit(text_surface, (150, 50))
 
     screen.blit(snail_surface, snail_rect)
-    player_rect.left += 1
     screen.blit(player_surface, player_rect)
 
     snail_rect.left -= 1
@@ -59,6 +58,12 @@ while True:
     if snail_rect.left < -100:
         snail_rect.left = 800 
     
+    if player_rect.colliderect(snail_rect):
+        player_rect.left -= 1
+    else: 
+        player_rect.left += 1
+        
+        
     pygame.display.update()
 
     #for framerate managing
