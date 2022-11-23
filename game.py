@@ -33,6 +33,9 @@ ground_surface = pygame.transform.scale(ground_surface, groundDimensions).conver
 text_surface = font.render("Brice and Isaac Relationship", False, "black")
 snail_surface = pygame.image.load(snailImages[1])
 
+player_surface = pygame.image.load("graphics/player/player_walk_1.png").convert_alpha()
+player_rect = player_surface.get_rect(midbottom = (80,270))
+
 while True:
     #To quit the game
     for event in pygame.event.get():
@@ -43,13 +46,10 @@ while True:
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 270))
     screen.blit(text_surface, (150, 50))
-    if snailPosition[0] % 100 == 0:
-        snail_surface = pygame.image.load(snailImages[0])
-        screen.blit(snail_surface, (snailPosition[0], snailPosition[1]))
-    else:
-        snail_surface = pygame.image.load(snailImages[1])
-        screen.blit(snail_surface, (snailPosition[0], snailPosition[1]))
-    
+    snail_surface = pygame.image.load(snailImages[0])
+    screen.blit(snail_surface, (snailPosition[0], snailPosition[1]))
+    player_rect.left += 1
+    screen.blit(player_surface, player_rect)
     snailPosition[0] -= 1
     if snailPosition[0] < -50:
         snailPosition[0] = 800
